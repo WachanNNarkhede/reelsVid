@@ -1,5 +1,5 @@
 "use client";
-
+import Image from "next/image";
 import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
 import { Home, User } from "lucide-react";
@@ -8,6 +8,7 @@ import { useNotification } from "./Notification";
 export default function Header() {
   const { data: session } = useSession();
   const { showNotification } = useNotification();
+  console.log("role: ", session);
 
   const handleSignOut = async () => {
     try {
@@ -50,10 +51,35 @@ export default function Header() {
               >
                 {session ? (
                   <>
-                    <li className="px-4 py-1">
+                    <li className="px-4 py-1 flex">
                       <span className="text-sm opacity-70">
                         {session.user?.email?.split("@")[0]}
                       </span>
+                      {
+                        session.user.role === "superadmin" && (
+                          <div className="badge badge-soft badge-info text-white ml-2 flex">
+                            Super Admin<Image src="/tick.png" height={25} width={25} alt="tick" />
+                          </div>
+                        )
+
+
+                      }
+                      {
+                        session.user.role === "admin" && (
+                          <div className="badge badge-soft badge-success text-white ml-2 flex">
+                             Admin<Image src="/tick.png" height={25} width={25} alt="tick" />
+                          </div>
+                        )
+                      }
+                      {
+                        session.user.role === "user" && (
+                          <div className="badge badge-soft badge-primary text-white ml-2 flex">
+                             User<Image src="/tick.png" height={25} width={25} alt="tick" />
+                          </div>
+                        )
+                      }
+
+                      
                     </li>
                     <div className="divider my-1"></div>
 
@@ -80,6 +106,22 @@ export default function Header() {
                         Dashboard
                       </Link>
                     </li>
+
+                   
+
+                    {session.user.role === "superadmin" && (
+                       <li>
+                       <Link
+                         href="/superadmindashboard"
+                         className="px-4 py-2 hover:bg-base-200 block w-full"
+                         onClick={() =>
+                           showNotification("Welcome to  Dashboard", "info")
+                         }
+                       >
+                         Super Admin Dashboard
+                       </Link>
+                     </li>
+                    )}
 
                     <li>
                       <button
