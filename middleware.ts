@@ -1,7 +1,5 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import withAuth from "next-auth/middleware";
-import { getSession } from "next-auth/react";
-import { NextResponse } from "next/server";
+ import withAuth from "next-auth/middleware";
+ import { NextResponse } from "next/server";
 
 export default withAuth(
     function middleware(req) {
@@ -55,14 +53,4 @@ export const config = {
     matcher: ["/((?!_next/static|_next/image|favicon.ico|public/).*)"],
 };
 
-export const requireRole = (role: "superadmin" | "admin" | "user") => {
-    return async (req: NextApiRequest, res: NextApiResponse, next: () => void) => {
-        const session = await getSession({ req });
-
-        if (!session || session.user.role !== role) {
-            return res.status(403).json({ message: "Access denied" });
-        }
-
-        next(); 
-    };
-};
+ 
