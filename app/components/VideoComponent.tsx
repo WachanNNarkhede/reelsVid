@@ -15,7 +15,7 @@ export default function VideoComponent({ video }: { video: IVideo }) {
 
     try {
       setloading(true);
-      const response = await fetch("http://localhost:3000/api/videos", {
+      const response = await fetch("/api/videos", {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ videoId: videoids })
