@@ -2,17 +2,14 @@ import { NextResponse } from "next/server";
 import { connectToDatabase } from "@/lib/db";
 import UserModel from "@/models/User";
 
-
 export async function PUT(
     request: Request,
     { params }: { params: { id: string } }
 ) {
-
-   
-
     const { id } = params;
     const { role } = await request.json();
 
+    // Validate the role
     if (!role || !["superadmin", "admin", "user"].includes(role)) {
         return NextResponse.json({ message: "Invalid role" }, { status: 400 });
     }
