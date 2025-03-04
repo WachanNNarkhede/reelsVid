@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import VideoFeed from "./components/VideoFeed";
+import VideoFeed from "@/app/components/VideoFeed";
 import { IVideo } from "@/models/Video";
 import { apiClient } from "@/lib/api-client";
 
