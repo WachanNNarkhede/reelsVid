@@ -81,7 +81,7 @@ export default function Register() {
             onChange={(e) => setEmail(e.target.value)}
             required
             className="w-full px-4 py-3 bg-white/5 border border-white/10 text-white rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400 focus:bg-white/10 transition-all duration-300 placeholder-white/50"
-            placeholder="Your sexy email"
+            placeholder="Your  email"
           />
         </div>
         <div className="group">
